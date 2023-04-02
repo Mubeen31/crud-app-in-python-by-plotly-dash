@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #e6e6e6;
+  margin: 0;
+}
+
+.title_background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 5px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.image {
+  height: 30px;
+}
+
+.title_text {
+ font-weight: bold;
+ font-size: 17;
+}
+
+.title_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 5px;
+  margin-left: 10px;
+}
+
+.text_size {
+  font-size: 15px;
+}
+
+.modal_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.button_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input_column {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_row {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  row-gap: 5px;
+}
+
+.button_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.bg_table {
+  background: rgba(255, 255, 255, 1);
+  width: 930px;
+  height: 480px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.bg_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
