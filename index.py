@@ -80,43 +80,43 @@ app.layout = html.Div([
         dbc.ModalBody([
             html.Div([
                 html.Div([
-                    html.P('First name', style={'color': 'white'}),
+                    html.P('First name', style={'color': 'black'}),
                     dcc.Input(id='first_name',
                               placeholder='Type first name',
                               style={'margin-top': '-10px', 'color': 'black'})
                 ], className='input_column'),
                 html.Div([
-                    html.P('Last name', style={'color': 'white'}),
+                    html.P('Last name', style={'color': 'black'}),
                     dcc.Input(id='last_name',
                               placeholder='Type last name',
                               style={'margin-top': '-10px', 'color': 'black'})
                 ], className='input_column'),
                 html.Div([
-                    html.P('Date of birth', style={'color': 'white'}),
+                    html.P('Date of birth', style={'color': 'black'}),
                     dcc.Input(id='date_of_birth',
                               placeholder='dd/mm/yyyy',
                               style={'margin-top': '-10px', 'color': 'black'})
                 ], className='input_column'),
                 html.Div([
-                    html.P('Email', style={'color': 'white'}),
+                    html.P('Email', style={'color': 'black'}),
                     dcc.Input(id='email_address',
                               placeholder='Type email',
                               style={'margin-top': '-10px', 'color': 'black'})
                 ], className='input_column'),
                 html.Div([
-                    html.P('Address', style={'color': 'white'}),
+                    html.P('Address', style={'color': 'black'}),
                     dcc.Input(id='living_address',
                               placeholder='Type address',
                               style={'margin-top': '-10px', 'color': 'black'})
                 ], className='input_column'),
                 html.Div([
-                    html.P('Country name', style={'color': 'white'}),
+                    html.P('Country name', style={'color': 'black'}),
                     dcc.Input(id='name_country',
                               placeholder='Type country name',
                               style={'margin-top': '-10px', 'color': 'black'})
                 ], className='input_column'),
                 html.Div([
-                    html.P('Mobile no.', style={'color': 'white'}),
+                    html.P('Mobile no.', style={'color': 'black'}),
                     dcc.Input(id='mobile_number',
                               placeholder='Type mobile number',
                               style={'margin-top': '-10px', 'color': 'black'})
@@ -232,13 +232,13 @@ app.layout = html.Div([
                     html.P('Type below field name of the row', style={'color': 'black'}),
                     dcc.Input(id='field_name',
                               placeholder='Type here field name',
-                              style={'margin-top': '-10px', 'color': 'black', 'width': '200px'})
+                              style={'margin-top': '-10px', 'color': 'black', 'width': '220px'})
                 ], className='input_column'),
                 html.Div([
                     html.P('Type below correct value', style={'color': 'black'}),
                     dcc.Input(id='correct_value',
                               placeholder='Type here correct value',
-                              style={'margin-top': '-10px', 'color': 'black', 'width': '200px'})
+                              style={'margin-top': '-10px', 'color': 'black', 'width': '220px'})
                 ], className='input_column'),
             ], className='input_row'),
 
