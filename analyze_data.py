@@ -11,8 +11,4 @@ from data import config
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-retrieve_data = db.get()
-df = pd.DataFrame.from_dict(retrieve_data.val(), orient='index')
-df = df.reset_index()
-df.rename(columns={'index': 'id'}, inplace=True)
-print(df)
+print(db.child('-NS10u5zd0CuZI7dRPiN').remove())

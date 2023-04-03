@@ -43,18 +43,33 @@ app.layout = html.Div([
     ], className='row'),
 
     html.Div(id='insert_user_data', children=[]),
+    html.Div(id='update_user_data', children=[]),
+    html.Div(id='delete_user_data', children=[]),
 
+    # Add, Read, Update, Delete data buttons
     html.Div([
         html.Div([
             html.P(dcc.Markdown('''Insert user data using the below button in the **Google Firebase** Database.'''),
                    style={'margin-bottom': '-10px', 'color': 'black'}),
-            dbc.Button("Add Data",
-                       id="open-centered-user",
-                       n_clicks=0,
-                       class_name='text_size'),
+            html.Div([
+                dbc.Button("Add Data",
+                           id="open-centered-user",
+                           n_clicks=0,
+                           class_name='text_size'),
+                dbc.Button("Update Data",
+                           id="update_data",
+                           n_clicks=0,
+                           class_name='text_size'),
+                dbc.Button("Delete Data",
+                           id="delete_data",
+                           n_clicks=0,
+                           class_name='text_size'),
+            ], className='button_rows')
         ], className='button_text'),
     ], className='modal_row'),
+    # Add, Read, Update, Delete data buttons
 
+    # Add data
     dbc.Modal([
         dbc.ModalHeader(dbc.ModalTitle("Add data using the below cells."),
                         close_button=True),
@@ -135,7 +150,9 @@ app.layout = html.Div([
             is_open=False
         )
     ]),
+    # Add data
 
+    # Data Table
     html.Div([
         dbc.Spinner(html.Div([dash_table.DataTable(id='my_user_datatable',
                                                    columns=[{"name": i, "id": i} for i in df.columns],
@@ -163,11 +180,166 @@ app.layout = html.Div([
                                                    fixed_rows={'headers': True},
                                                    )
                               ], className='bg_table'), color='success')
-    ], className='bg_container')
+    ], className='bg_container'),
+    # Data Table
+
+    # Update data
+    dbc.Modal([
+        dbc.ModalHeader(dbc.ModalTitle("Update data using the below cells."),
+                        close_button=True),
+        dbc.ModalBody([
+
+            html.Div([
+                html.Div([
+                    html.P('Type below id of the row', style={'color': 'black'}),
+                    dcc.Input(id='type_id',
+                              placeholder='Type here id',
+                              style={'margin-top': '-10px', 'color': 'black', 'width': '200px'})
+                ], className='input_column'),
+
+                dbc.Spinner(html.Div([dash_table.DataTable(id='update_datatable',
+                                                           columns=[{"name": i, "id": i} for i in df.columns],
+                                                           page_size=13,
+                                                           virtualization=True,
+                                                           style_cell={'textAlign': 'left',
+                                                                       'min-width': '100px',
+                                                                       'backgroundColor': 'rgba(255, 255, 255, 0)',
+                                                                       'minWidth': 180,
+                                                                       'maxWidth': 180,
+                                                                       'width': 180},
+                                                           style_header={
+                                                               'backgroundColor': 'black',
+                                                               'fontWeight': 'bold',
+                                                               'font': 'Lato, sans-serif',
+                                                               'color': 'orange',
+                                                               'border': '1px solid white',
+                                                           },
+                                                           style_data={'textOverflow': 'hidden',
+                                                                       'color': 'black',
+                                                                       'fontWeight': 'bold',
+                                                                       'font': 'Lato, sans-serif'},
+                                                           fixed_rows={'headers': True},
+                                                           )
+                                      ], className='update_bg_table'), color='success'),
+            ], className='input_and_data_table'),
+
+            html.Div([
+                html.Div([
+                    html.P('Type below field name of the row', style={'color': 'black'}),
+                    dcc.Input(id='field_name',
+                              placeholder='Type here field name',
+                              style={'margin-top': '-10px', 'color': 'black', 'width': '200px'})
+                ], className='input_column'),
+                html.Div([
+                    html.P('Type below correct value', style={'color': 'black'}),
+                    dcc.Input(id='correct_value',
+                              placeholder='Type here correct value',
+                              style={'margin-top': '-10px', 'color': 'black', 'width': '200px'})
+                ], className='input_column'),
+            ], className='input_row'),
+
+            html.Div([
+                dbc.Button('Update Data',
+                           id='update_user_data_button',
+                           n_clicks=0,
+                           class_name='text_size')
+            ], className='button_row'),
+
+            html.Div([
+                dbc.Alert(
+                    "Data has been updated.",
+                    id="update_alert",
+                    dismissable=True,
+                    is_open=False,
+                    duration=5000,
+                    style={'margin-top': '5px'}
+                )
+            ])
+        ]),
+        dbc.ModalFooter(dbc.Button("Close",
+                                   id="close_update_data",
+                                   className="ms-auto",
+                                   n_clicks=0))
+    ], id="update_data_modal",
+        centered=True,
+        is_open=False,
+        size="xl"),
+
+    # Update data
+
+    # Delete data
+    dbc.Modal([
+        dbc.ModalHeader(dbc.ModalTitle("Delete data using the below cell."),
+                        close_button=True),
+        dbc.ModalBody([
+
+            html.Div([
+                html.Div([
+                    html.P('Type below id of the row', style={'color': 'black'}),
+                    dcc.Input(id='type_id_delete',
+                              placeholder='Type here id',
+                              style={'margin-top': '-10px', 'color': 'black', 'width': '200px'})
+                ], className='input_column'),
+
+                dbc.Spinner(html.Div([dash_table.DataTable(id='delete_datatable',
+                                                           columns=[{"name": i, "id": i} for i in df.columns],
+                                                           page_size=13,
+                                                           virtualization=True,
+                                                           style_cell={'textAlign': 'left',
+                                                                       'min-width': '100px',
+                                                                       'backgroundColor': 'rgba(255, 255, 255, 0)',
+                                                                       'minWidth': 180,
+                                                                       'maxWidth': 180,
+                                                                       'width': 180},
+                                                           style_header={
+                                                               'backgroundColor': 'black',
+                                                               'fontWeight': 'bold',
+                                                               'font': 'Lato, sans-serif',
+                                                               'color': 'orange',
+                                                               'border': '1px solid white',
+                                                           },
+                                                           style_data={'textOverflow': 'hidden',
+                                                                       'color': 'black',
+                                                                       'fontWeight': 'bold',
+                                                                       'font': 'Lato, sans-serif'},
+                                                           fixed_rows={'headers': True},
+                                                           )
+                                      ], className='update_bg_table'), color='success'),
+            ], className='input_and_data_table'),
+
+            html.Div([
+                dbc.Button('Delete Data',
+                           id='delete_user_data_button',
+                           n_clicks=0,
+                           class_name='text_size')
+            ], className='button_row'),
+
+            html.Div([
+                dbc.Alert(
+                    "Data has been deleted.",
+                    id="delete_alert",
+                    dismissable=True,
+                    is_open=False,
+                    duration=5000,
+                    style={'margin-top': '5px'}
+                )
+            ])
+        ]),
+        dbc.ModalFooter(dbc.Button("Close",
+                                   id="close_delete_data",
+                                   className="ms-auto",
+                                   n_clicks=0))
+    ], id="delete_data_modal",
+        centered=True,
+        is_open=False,
+        size="xl"),
+
+    # delete data
 
 ])
 
 
+# Add data
 @app.callback(
     Output("modal-centered-user", "is_open"),
     [Input("open-centered-user", "n_clicks")],
@@ -236,18 +408,142 @@ def update_value(n_clicks, first_name, last_name, date_of_birth, email_address, 
         ], '', '', '', '', '', '', ''
 
 
+# Add data
+
+
+# Data table
 @app.callback(Output('my_user_datatable', 'data'),
-              [Input("user_data_added_close", "n_clicks")])
-def display_table(n1):
+              [Input("insert_user_data_button", "n_clicks")],
+              [Input("update_user_data_button", "n_clicks")],
+              [Input("delete_user_data_button", "n_clicks")])
+def display_table(n1, n2, n3):
     retrieve_data = db.get()
     df = pd.DataFrame.from_dict(retrieve_data.val(), orient='index')
     df = df.reset_index()
     df.rename(columns={'index': 'id'}, inplace=True)
     df = df[['id', 'Date Time', 'First Name', 'Last Name', 'Date Of Birth',
              'Email', 'Address', 'Country', 'Mobile No']]
-    if n1 >= 0:
+    if n1 >= 0 or n2 >= 0 or n3 >= 0:
         return df.to_dict('records')
 
+
+# Data table
+
+
+# Update data
+@app.callback(
+    Output("update_data_modal", "is_open"),
+    [Input("update_data", "n_clicks")],
+    [Input("close_update_data", "n_clicks")],
+    [State("update_data_modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+
+@app.callback(Output('update_datatable', 'data'),
+              [Input("type_id", "value")],
+              [Input("update_user_data_button", "n_clicks")])
+def display_table(input_value, n1):
+    retrieve_data = db.get()
+    df = pd.DataFrame.from_dict(retrieve_data.val(), orient='index')
+    df = df.reset_index()
+    df.rename(columns={'index': 'id'}, inplace=True)
+    df = df[['id', 'Date Time', 'First Name', 'Last Name', 'Date Of Birth',
+             'Email', 'Address', 'Country', 'Mobile No']]
+    id_df = df[df['id'] == input_value]
+
+    if n1 >= 0:
+        return id_df.to_dict('records')
+
+
+@app.callback(Output('update_user_data', 'children'),
+              Output('field_name', 'value'),
+              Output('correct_value', 'value'),
+              [Input('update_user_data_button', 'n_clicks')],
+              [Input("type_id", "value")],
+              [State('field_name', 'value')],
+              [State('correct_value', 'value')],
+              prevent_initial_call=True)
+def update_value(n_clicks, input_value, field_name, correct_value):
+    fieldName = field_name
+    correctValue = correct_value
+
+    if n_clicks > 0:
+        return [
+            db.child(input_value).update({fieldName: correctValue})
+        ], '', ''
+
+
+@app.callback(
+    Output("update_alert", "is_open"),
+    [Input("update_user_data_button", "n_clicks")],
+    [State("update_alert", "is_open")],
+)
+def toggle_alert(n, is_open):
+    if n:
+        return not is_open
+    return is_open
+
+
+# Update data
+
+
+# Delete data
+@app.callback(
+    Output("delete_data_modal", "is_open"),
+    [Input("delete_data", "n_clicks")],
+    [Input("close_delete_data", "n_clicks")],
+    [State("delete_data_modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+
+@app.callback(Output('delete_datatable', 'data'),
+              [Input("type_id_delete", "value")],
+              [Input("delete_user_data_button", "n_clicks")])
+def display_table(input_value, n1):
+    retrieve_data = db.get()
+    df = pd.DataFrame.from_dict(retrieve_data.val(), orient='index')
+    df = df.reset_index()
+    df.rename(columns={'index': 'id'}, inplace=True)
+    df = df[['id', 'Date Time', 'First Name', 'Last Name', 'Date Of Birth',
+             'Email', 'Address', 'Country', 'Mobile No']]
+    id_df = df[df['id'] == input_value]
+
+    if n1 >= 0:
+        return id_df.to_dict('records')
+
+
+@app.callback(Output('delete_user_data', 'children'),
+              Output("type_id_delete", "value"),
+              [Input("type_id_delete", "value")],
+              [Input('delete_user_data_button', 'n_clicks')],
+              prevent_initial_call=True)
+def update_value(input_value, n_clicks):
+    if n_clicks > 0:
+        return [
+            db.child(input_value).remove()
+        ], ''
+
+
+@app.callback(
+    Output("delete_alert", "is_open"),
+    [Input("delete_user_data_button", "n_clicks")],
+    [State("delete_alert", "is_open")],
+)
+def toggle_alert(n, is_open):
+    if n:
+        return not is_open
+    return is_open
+
+
+# Delete data
 
 if __name__ == '__main__':
     app.run_server(debug=True)
