@@ -420,15 +420,16 @@ def update_value(n_clicks, first_name, last_name, date_of_birth, email_address, 
               [Input("insert_user_data_button", "n_clicks")],
               [Input("read_data", "n_clicks")],
               [Input("update_user_data_button", "n_clicks")],
-              [Input("delete_user_data_button", "n_clicks")])
-def display_table(n1, n2, n3, n4):
+              [Input("delete_user_data_button", "n_clicks")],
+              [Input("close_delete_data", "n_clicks")])
+def display_table(n1, n2, n3, n4, n5):
     retrieve_data = db.get()
     df = pd.DataFrame.from_dict(retrieve_data.val(), orient='index')
     df = df.reset_index()
     df.rename(columns={'index': 'id'}, inplace=True)
     df = df[['id', 'Date Time', 'First Name', 'Last Name', 'Date Of Birth',
              'Email', 'Address', 'Country', 'Mobile No']]
-    if n1 >= 0 or n2 >= 0 or n3 >= 0 or n4 >= 0:
+    if n1 >= 0 or n2 >= 0 or n3 >= 0 or n4 >= 0 or n5 >= 0:
         return df.to_dict('records')
 
 
