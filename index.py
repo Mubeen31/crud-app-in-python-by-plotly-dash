@@ -466,6 +466,7 @@ def display_table(input_value, n1):
 
 
 @app.callback(Output('update_user_data', 'children'),
+              Output("type_id", "value"),
               Output('field_name', 'value'),
               Output('correct_value', 'value'),
               [Input('update_user_data_button', 'n_clicks')],
@@ -480,7 +481,7 @@ def update_value(n_clicks, input_value, field_name, correct_value):
     if n_clicks > 0:
         return [
             db.child(input_value).update({fieldName: correctValue})
-        ], '', ''
+        ], '', '', ''
 
 
 @app.callback(
@@ -513,7 +514,7 @@ def toggle_modal(n1, n2, is_open):
 @app.callback(Output('delete_datatable', 'data'),
               [Input("type_id_delete", "value")],
               [Input("delete_user_data_button", "n_clicks")])
-def display_table(input_value, n1):
+def display_table(input_value, n1_delete):
     retrieve_data = db.get()
     df = pd.DataFrame.from_dict(retrieve_data.val(), orient='index')
     df = df.reset_index()
@@ -522,13 +523,13 @@ def display_table(input_value, n1):
              'Email', 'Address', 'Country', 'Mobile No']]
     id_df = df[df['id'] == input_value]
 
-    if n1 >= 0:
+    if n1_delete >= 0:
         return id_df.to_dict('records')
 
 
 @app.callback(Output('delete_user_data', 'children'),
               Output("type_id_delete", "value"),
-              [Input("type_id_delete", "value")],
+              [State("type_id_delete", "value")],
               [Input('delete_user_data_button', 'n_clicks')],
               prevent_initial_call=True)
 def update_value(input_value, n_clicks):
